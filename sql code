@@ -1,0 +1,77 @@
+INSERT INTO  AUTHORS ( author_id,  author_name) VALUES (1, 'MAINURA SHARIPOVA');
+INSERT INTO  AUTHORS ( author_id,  author_name) VALUES (2, 'HELEN KRAVTZ');
+INSERT INTO  AUTHORS ( author_id,  author_name) VALUES (3, 'NIKA WILLZ');
+
+
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (1, 'The secret wood', 1, 3);
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (2, 'The car', 3, 4);
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (3, 'The ox ', 2, 5);
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (4, 'The lake', 1, 6);
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (5, 'winter', 3, 2);
+INSERT INTO  BOOKS ( book_id ,   book_title, author_id,  book_seria) VALUES (6, 'The secret wood 2', 3, 4);
+
+
+
+INSERT INTO  GENRES ( genre_id  ,   genre_name) VALUES (1, 'horror');
+INSERT INTO  GENRES ( genre_id  ,   genre_name) VALUES (2, 'adventure');
+
+
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (2, 1);
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (3, 1);
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (1, 2);
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (4, 2);
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (5, 1);
+
+INSERT INTO  BOOK_GENRES ( book_id, genre_id ) VALUES (6, 2);
+
+
+
+
+Ex-1:
+
+SELECT BOOKS.book_id, book_title FROM BOOKS  INNER JOIN AUTHORS ON   BOOKS.author_id=AUTHORS. author_id WHERE author_name='MAINURA SHARIPOVA';
+---------------------------------------------------
+
+Ex-2:
+SELECT  BOOKS.book_title,  GENRES.genre_name
+FROM BOOKS INNER JOIN BOOK_GENRES ON
+BOOKS.book_id = BOOK_GENRES.book_id 
+INNER JOIN GENRES ON GENRES.genre_id = BOOK_GENRES.genre_id  WHERE genre_name='adventure';
+
+
+----------------------------------------------------------------------------------------------
+Ex-3:
+SELECT  COUNT(BOOKS.book_title),  GENRES.genre_name
+FROM BOOKS INNER JOIN BOOK_GENRES ON
+BOOKS.book_id = BOOK_GENRES.book_id 
+INNER JOIN GENRES ON GENRES.genre_id = BOOK_GENRES.genre_id   GROUP BY genre_name;
+
+---------------------------------------------------------------------------
+
+Ex-4:
+SELECT COUNT(BOOKS.book_title), AUTHORS.author_name FROM BOOKS 
+LEFT JOIN AUTHORS ON BOOKS.author_id=AUTHORS.author_id  GROUP BY author_name;
+
+---------------------------------------------------------------------------
+
+Ex-5:
+
+SELECT  BOOKS.book_title,  GENRES.genre_name
+FROM BOOKS INNER JOIN BOOK_GENRES ON
+BOOKS.book_id = BOOK_GENRES.book_id 
+INNER JOIN GENRES ON GENRES.genre_id = BOOK_GENRES.genre_id  WHERE book_seria BETWEEN 5 AND 10 AND genre_name='adventure';
+
+---------------------------------------------------------------------------
+
+Ex-5:
+
+SELECT  BOOKS.book_title,  GENRES.genre_name
+FROM BOOKS INNER JOIN BOOK_GENRES ON
+BOOKS.book_id = BOOK_GENRES.book_id 
+INNER JOIN GENRES ON GENRES.genre_id = BOOK_GENRES.genre_id  WHERE book_seria > 5 AND  book_seria<=10 AND genre_name='adventure';
+
